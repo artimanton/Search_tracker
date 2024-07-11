@@ -12,7 +12,7 @@ class RequestRepository @Inject constructor(private val requestDao: RequestDao) 
         requestDao.insertRequest(entity)
     }
 
-    suspend fun deleteById(entity: RequestEntity) {
+    suspend fun delete(entity: RequestEntity) {
         requestDao.deleteRequest(entity)
     }
 }

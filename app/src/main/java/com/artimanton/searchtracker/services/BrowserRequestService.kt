@@ -1,6 +1,7 @@
 package com.artimanton.searchtracker.services
 
 import android.accessibilityservice.AccessibilityService
+import android.util.Log
 import android.view.accessibility.AccessibilityEvent
 import com.artimanton.searchtracker.RequestApplication
 import com.artimanton.searchtracker.data.db.RequestEntity
@@ -17,20 +18,24 @@ class BrowserRequestService : AccessibilityService() {
 
     override fun onAccessibilityEvent(event: AccessibilityEvent?) {
         event?.let {
-            val source = it.source
-            val text = source?.text?.toString() ?: return
+            val eventType = event.eventType
+            val source = event.source
+            val packageName = event.packageName?.toString()
+            val className = event.className?.toString()
+            val text = source?.text?.toString()
 
-            if (text.contains("google.com")) {
-                val url = it.packageName?.toString()
+            Log.d("MyLog", "Accessibility event received. Type: $eventType, Package: $packageName, Class: $className, Text: $text")
+
+            if (text?.contains("google.com", ignoreCase = true) == true) {
                 val request = RequestEntity(
                     queryText = text,
                     timestamp = Date(),
-                    url = url
+                    url = packageName // You may want to verify if packageName is indeed the URL
                 )
-                val repository = (application as RequestApplication).repository
 
+                val repository = (application as RequestApplication).repository
                 serviceScope.launch {
-                    repository?.insert(request)
+                    repository.insert(request)
                 }
             }
         }

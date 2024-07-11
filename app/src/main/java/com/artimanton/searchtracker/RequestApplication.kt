@@ -8,6 +8,6 @@ import dagger.hilt.android.HiltAndroidApp
 @HiltAndroidApp
 class RequestApplication : Application(){
     private val database by lazy { RequestDatabase.getDatabase(this) }
-    val repository by lazy { database.requestDao()?.let { RequestRepository(it) } }
+    val repository by lazy { RequestRepository(database.requestDao()) }
 }
 
