@@ -1,15 +1,15 @@
 package com.artimanton.searchtracker.data.db
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
-import androidx.room.Delete
-import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface RequestDao {
-    @Query("SELECT * FROM requests ORDER BY timestamp DESC")
-    fun getAllRequests(): Flow<List<RequestEntity>>
+    @Query("SELECT * FROM requests")
+    fun getAllRequests(): LiveData<List<RequestEntity>>
 
     @Insert
     suspend fun insertRequest(request: RequestEntity)

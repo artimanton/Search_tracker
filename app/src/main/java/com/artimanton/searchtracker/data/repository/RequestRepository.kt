@@ -4,7 +4,7 @@ import com.artimanton.searchtracker.data.db.RequestDao
 import com.artimanton.searchtracker.data.db.RequestEntity
 import javax.inject.Inject
 
-class RequestRepository @Inject constructor(private val requestDao: RequestDao) {
+class RequestRepository @Inject constructor(val requestDao: RequestDao) {
 
     fun getAllQueries() = requestDao.getAllRequests()
 

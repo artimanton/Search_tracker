@@ -6,6 +6,7 @@ import com.artimanton.searchtracker.data.db.RequestDao
 import com.artimanton.searchtracker.data.db.RequestDatabase
 import com.artimanton.searchtracker.data.repository.RequestRepository
 import com.artimanton.searchtracker.utils.Constants.DB_NAME
+import com.artimanton.searchtracker.viewmodel.RequestViewModel
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -34,5 +35,11 @@ object AppModule {
     @Singleton
     fun provideRepository(queryDao: RequestDao): RequestRepository {
         return RequestRepository(queryDao)
+    }
+
+    @Provides
+    @Singleton
+    fun provideSharedViewModel(repository: RequestRepository): RequestViewModel {
+        return RequestViewModel(repository.requestDao)
     }
 }

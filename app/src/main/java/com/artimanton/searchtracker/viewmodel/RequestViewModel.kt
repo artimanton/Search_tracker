@@ -1,5 +1,6 @@
 package com.artimanton.searchtracker.viewmodel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.artimanton.searchtracker.data.db.RequestDao
@@ -12,7 +13,8 @@ import javax.inject.Inject
 class RequestViewModel @Inject constructor(
     private val requestDao: RequestDao
 ) : ViewModel() {
-    val queries = requestDao.getAllRequests()
+
+    val allRequests: LiveData<List<RequestEntity>> = requestDao.getAllRequests()
 
     fun insert(queries: RequestEntity) {
         viewModelScope.launch {
