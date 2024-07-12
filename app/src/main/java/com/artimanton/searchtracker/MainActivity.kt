@@ -6,7 +6,7 @@ import android.provider.Settings
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import com.artimanton.searchtracker.services.BrowserRequestService
-import com.artimanton.searchtracker.ui.components.QueryListScreen
+import com.artimanton.searchtracker.ui.screens.QueryListScreen
 import com.artimanton.searchtracker.viewmodel.RequestViewModel
 import dagger.hilt.android.AndroidEntryPoint
 

@@ -8,7 +8,7 @@ import androidx.room.TypeConverters
 import com.artimanton.searchtracker.utils.Constants.DB_NAME
 import com.artimanton.searchtracker.utils.DateTypeConverter
 
-@Database(entities = [RequestEntity::class], version = 1)
+@Database(entities = [RequestEntity::class], version = 1, exportSchema = false)
 @TypeConverters(DateTypeConverter::class)
 abstract class RequestDatabase : RoomDatabase() {
     abstract fun requestDao(): RequestDao
